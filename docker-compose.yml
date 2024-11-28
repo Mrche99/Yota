@@ -16,5 +16,5 @@ services:
       - '8090:8080'
     networks:
       yota_test_task:
-          ipv4_address: "10.2.1.4"
+          ipv4_address: 10.2.1.4
     restart: unless-stopped
