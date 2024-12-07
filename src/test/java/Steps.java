@@ -2,6 +2,9 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.awaitility.Awaitility;
+import pojo.AdditionalParameters;
+import pojo.AuthRequestPojo;
+import pojo.CreateCustomerRequestPojo;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,18 +15,14 @@ import java.util.concurrent.TimeUnit;
 import static io.restassured.RestAssured.given;
 
 public class Steps {
-    public static String loggingInAccount(String username, String password) {
-        //Форматируемая строка запроса, зависит от переедаемых логина и пароля в метод
-        String requestBody = String.format(""" 
-                {
-                    "login":"%s",
-                    "password":"%s"
-                }
-                """,username,password);
 
+
+
+    public static String loggingInAccount(String username, String password) {
+        AuthRequestPojo authRequestPojo = new AuthRequestPojo();
         Response response = given()//Запрос к сервису, с передачей логина и пароля для авторизации
                 .contentType(ContentType.JSON)
-                .body(requestBody)
+                .body(authRequestPojo.withLogin(username).withPassword(password))
                 .when()
                 .post("/login")
                 .then()
@@ -39,7 +38,7 @@ public class Steps {
                 .atMost(1,TimeUnit.MINUTES)
                 .pollInterval(100, TimeUnit.MILLISECONDS)
                 .until(() -> {
-                    Response response = RestAssured.given()
+                    Response response = given()
                             .header("authToken", token)
                             .get("simcards/getEmptyPhone")
                             .then()
@@ -62,43 +61,32 @@ public class Steps {
 
     }
 
-    public static CustomerInfo postingCustomer(String token, List<Long> phones){
-        final String[] temp = new String[1];
-        final Long[] successfulPhone = new Long[1];
-        Awaitility.await().atMost(1,TimeUnit.MINUTES)
-                .pollInterval(100, TimeUnit.MILLISECONDS)
-                .until(() -> {
-                    for(Long phone:phones){
-                        String requestBody =String.format("""
-                {
-                    "name":"test",
-                    "phone":"%s",
-                    "additionalParameters":{
-                    "string":"test"
-                    }
-                    }""",phone) ;
-                    Response response = RestAssured.given()
-                            . given() //Запрос для отправки нового пользователя в сервис
-                            .header("authToken", token)
-                            .contentType(ContentType.JSON)
-                            .body(requestBody)
-                            .when()
-                            .post("/customer/postCustomer")
-                            .then().extract().response();
-                    if(response.statusCode() == 200) {
-                        temp[0] = response.jsonPath().getString("id");
-                        successfulPhone[0] = phone;
-                    return true;
-                    }
-                }
-                    return false;
-                });
-        System.out.println(temp[0]);
-        System.out.println(successfulPhone[0]);
-        CustomerInfo customerInfo = new CustomerInfo(temp[0],successfulPhone[0]);
-        return customerInfo;
-    }
+    public static CustomerInfo postingCustomer(String name, String token, List<Long> phones) {
+        CreateCustomerRequestPojo createCustomerRequestPojo = new CreateCustomerRequestPojo();
+        AdditionalParameters additionalParameters = new AdditionalParameters("dasdasdas");
+        String temp = "";
+        Long successfulPhone = null;
 
+
+        for (Long phone : phones) {
+            Response response = given()
+                    .given() //Запрос для отправки нового пользователя в сервис
+                    .header("authToken", token)
+                    .contentType(ContentType.JSON)
+                    .body(createCustomerRequestPojo.withName(name).withPhoneNumber(String.valueOf(phone)).withAdditionalParameters(additionalParameters))
+                    .when()
+                    .post("/customer/postCustomer")
+                    .then().extract().response();
+            if (response.statusCode() == 200) {
+                temp = response.jsonPath().getString("id");
+                successfulPhone = phone;
+                break;
+            }}
+            System.out.println(temp);
+            System.out.println(successfulPhone);
+            CustomerInfo customerInfo = new CustomerInfo(temp, successfulPhone);
+            return customerInfo;
+    }
 
 
 
@@ -108,7 +96,7 @@ public class Steps {
                     .atMost(2,TimeUnit.MINUTES)
                      .pollInterval(100, TimeUnit.MILLISECONDS)
                     .until(() -> {
-                    Response response = RestAssured.given()
+                    Response response = given()
                             .header("authToken", token)
                             .get(pathToEndPoint)
                             .then()
@@ -124,7 +112,6 @@ public class Steps {
     }
 
     public static void findingCustomerByNumber(String token,Long phoneNumber){
-        //Дополняем xml запрос переменными, полученными ранее
         String xmlTemplate = null;
         try {
             // Чтение файла из ресурсов
@@ -163,7 +150,7 @@ public class Steps {
                 }
                 """,customerStatus);
             String pathToEndpoint = String.format("/customer/%s/changeCustomerStatus", idCustomer);
-            RestAssured.given()//Проверяем возможность изменения статуса с помощью двух ролей
+            given()//Проверяем возможность изменения статуса с помощью двух ролей
                     .header("authToken", token)
                     .contentType(ContentType.JSON)
                     .body(bodyMessage)

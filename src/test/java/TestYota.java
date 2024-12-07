@@ -6,9 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
 
-import static io.restassured.RestAssured.given;
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestYota {
     private static String adminToken;
     private static String userToken;
@@ -19,27 +17,31 @@ public class TestYota {
     /*    adminToken = Steps.loggingInAccount("admin","password");
         userToken = Steps.loggingInAccount("user","password");*/
     }
-    @ParameterizedTest
-    @CsvSource({
-            "admin,password",
-            "user,password"
-    })
-    public void authorization(String userName, String password){
-        Steps.loggingInAccount(userName,password);
+    @Test
+    public void authorizationAdmin(){
+        Steps.loggingInAccount("admin","password");
     }
-    @ParameterizedTest
-    @CsvSource({
-            "admin,password",
-            "user,password"
-    })
-    public void businessStory(String userName, String password){
-        String token = Steps.loggingInAccount(userName, password);
+
+    @Test
+    public void businessStoryAdmin(){
+        String token = Steps.loggingInAccount("admin", "password");
         List<Long> numbers = Steps.gettingEmptyPhone(token);
-        CustomerInfo customerInfo = Steps.postingCustomer(token,numbers);
+        CustomerInfo customerInfo = Steps.postingCustomer("test",token,numbers);
         System.out.println(customerInfo.getIdCustomer());
         Steps.gettingCustomerById(token,customerInfo.getIdCustomer());
         Steps.findingCustomerByNumber(token,customerInfo.getPhone());
-        Steps.changingCustomerStatus(token,customerInfo.getIdCustomer(),userName);
+        Steps.changingCustomerStatus(token,customerInfo.getIdCustomer(),"admin");
+    }
+
+    @Test
+    public void businessStoryUser(){
+        String token = Steps.loggingInAccount("user", "password");
+        List<Long> numbers = Steps.gettingEmptyPhone(token);
+        CustomerInfo customerInfo = Steps.postingCustomer("test",token,numbers);
+        System.out.println(customerInfo.getIdCustomer());
+        Steps.gettingCustomerById(token,customerInfo.getIdCustomer());
+        Steps.findingCustomerByNumber(token,customerInfo.getPhone());
+        Steps.changingCustomerStatus(token,customerInfo.getIdCustomer(),"user");
     }
 
     @Test
