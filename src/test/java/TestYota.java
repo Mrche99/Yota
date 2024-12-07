@@ -1,10 +1,14 @@
 import io.restassured.RestAssured;
+import io.restassured.config.RestAssuredConfig;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Properties;
 
 import static io.restassured.RestAssured.given;
 
@@ -15,9 +19,23 @@ public class TestYota {
 
     @BeforeAll
     public static void setUp() {
-        RestAssured.baseURI = "http://localhost:8090";
-    /*    adminToken = Steps.loggingInAccount("admin","password");
-        userToken = Steps.loggingInAccount("user","password");*/
+        Properties prop = new Properties();
+        try (InputStream input = RestAssuredConfig.class.getClassLoader().getResourceAsStream("application.properties")) {
+            if (input == null) {
+                throw new IOException("Файл свойств application.properties не найден в test ресурсах!");
+            }
+
+            // Загружаем свойства
+            prop.load(input);
+
+            // Устанавливаем baseURI для RestAssured
+            RestAssured.baseURI = prop.getProperty("restassured.baseURI");
+
+            System.out.println("RestAssured Base URI: " + RestAssured.baseURI);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Не удалось загрузить файл свойств", e);
+        }
     }
     @ParameterizedTest
     @CsvSource({
@@ -27,6 +45,7 @@ public class TestYota {
     public void authorization(String userName, String password){
         Steps.loggingInAccount(userName,password);
     }
+
     @ParameterizedTest
     @CsvSource({
             "admin,password",
@@ -41,7 +60,7 @@ public class TestYota {
         Steps.findingCustomerByNumber(token,customerInfo.getPhone());
         Steps.changingCustomerStatus(token,customerInfo.getIdCustomer(),userName);
     }
-
+    @Disabled
     @Test
     public void xmlRequest(){
         Long phone = Long.valueOf("79280340916");

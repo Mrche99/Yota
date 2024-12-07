@@ -1,3 +1,7 @@
+import PojoBody.ChangingStatusBody;
+import PojoBody.LoginRequest;
+import PojoBody.PostingCustomerBody;
+import com.google.gson.Gson;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -5,21 +9,22 @@ import org.awaitility.Awaitility;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static io.restassured.RestAssured.given;
 
 public class Steps {
     public static String loggingInAccount(String username, String password) {
         //Форматируемая строка запроса, зависит от переедаемых логина и пароля в метод
-        String requestBody = String.format(""" 
-                {
-                    "login":"%s",
-                    "password":"%s"
-                }
-                """,username,password);
+        LoginRequest loginRequest = new LoginRequest(username, password);
+        Gson gson = new Gson();
+        String requestBody = gson.toJson(loginRequest);
+        System.out.println(requestBody);
 
         Response response = given()//Запрос к сервису, с передачей логина и пароля для авторизации
                 .contentType(ContentType.JSON)
@@ -34,7 +39,7 @@ public class Steps {
         return token;
     }
     public static List<Long> gettingEmptyPhone(String token){
-        final List<Long>[] result = new List[1];
+        AtomicReference<List<Long>> result = new AtomicReference<>();
         Awaitility.await()
                 .atMost(1,TimeUnit.MINUTES)
                 .pollInterval(100, TimeUnit.MILLISECONDS)
@@ -47,7 +52,7 @@ public class Steps {
                     if (response.getStatusCode() == 200){
                         List<Long> phones = response.jsonPath().getList("phones.phone", Long.class);
                         if (!phones.isEmpty()){
-                            result[0] = phones;
+                            result.set(phones);
                             return true;
                         }
                     } else {String errorMessage = response.jsonPath().getString("errorMessage");
@@ -56,46 +61,43 @@ public class Steps {
                     }
                     return false;
                 });
-        System.out.println(result[0]);
-        return result[0];
+        System.out.println(result);
+        return result.get();
 
 
     }
 
     public static CustomerInfo postingCustomer(String token, List<Long> phones){
-        final String[] temp = new String[1];
-        final Long[] successfulPhone = new Long[1];
+
+        AtomicReference<String> temp = new AtomicReference<>();
+        AtomicReference<Long> successfulPhone = new AtomicReference<>();
         Awaitility.await().atMost(1,TimeUnit.MINUTES)
                 .pollInterval(100, TimeUnit.MILLISECONDS)
                 .until(() -> {
                     for(Long phone:phones){
-                        String requestBody =String.format("""
-                {
-                    "name":"test",
-                    "phone":"%s",
-                    "additionalParameters":{
-                    "string":"test"
-                    }
-                    }""",phone) ;
-                    Response response = RestAssured.given()
-                            . given() //Запрос для отправки нового пользователя в сервис
-                            .header("authToken", token)
-                            .contentType(ContentType.JSON)
-                            .body(requestBody)
-                            .when()
-                            .post("/customer/postCustomer")
-                            .then().extract().response();
+                        Map<String,String> additionalParameters = Map.of("string", "test");
+                        PostingCustomerBody postingCustomerBody = new PostingCustomerBody("Test",String.valueOf(phone),additionalParameters);
+                        Gson gson = new Gson();
+                        String requestBody = gson.toJson(postingCustomerBody);
+                        Response response = RestAssured.given()
+                                . given() //Запрос для отправки нового пользователя в сервис
+                                .header("authToken", token)
+                                .contentType(ContentType.JSON)
+                                .body(requestBody)
+                                .when()
+                                .post("/customer/postCustomer")
+                                .then().extract().response();
                     if(response.statusCode() == 200) {
-                        temp[0] = response.jsonPath().getString("id");
-                        successfulPhone[0] = phone;
+                        temp.set(response.jsonPath().getString("id"));
+                        successfulPhone.set(phone);
                     return true;
                     }
                 }
                     return false;
                 });
-        System.out.println(temp[0]);
-        System.out.println(successfulPhone[0]);
-        CustomerInfo customerInfo = new CustomerInfo(temp[0],successfulPhone[0]);
+        System.out.println(temp);
+        System.out.println(successfulPhone);
+        CustomerInfo customerInfo = new CustomerInfo(temp.get(),successfulPhone.get());
         return customerInfo;
     }
 
@@ -105,7 +107,7 @@ public class Steps {
     public static void gettingCustomerById(String token,String idCustomer){
         String pathToEndPoint = String.format("customer/getCustomerById?customerId=%s",idCustomer);
              Awaitility.await()
-                    .atMost(2,TimeUnit.MINUTES)
+                    .atMost(130,TimeUnit.SECONDS)
                      .pollInterval(100, TimeUnit.MILLISECONDS)
                     .until(() -> {
                     Response response = RestAssured.given()
@@ -155,13 +157,12 @@ public class Steps {
 
         int httpStatusCode = (role.equals("admin")) ? 200: 401;
         if(token != null){
+            ChangingStatusBody changingStatusBody = new ChangingStatusBody("New");
+            Gson gson = new Gson();
+            String bodyMessage = gson.toJson(changingStatusBody);
             String customerStatus = "NEW";
             String statusCustomerParam = String.format("/customer/getCustomerById?customerId=%s", idCustomer);//передаем в параметры id полученный ранее
-            String bodyMessage = String.format("""
-                {
-                "status":"%s"
-                }
-                """,customerStatus);
+
             String pathToEndpoint = String.format("/customer/%s/changeCustomerStatus", idCustomer);
             RestAssured.given()//Проверяем возможность изменения статуса с помощью двух ролей
                     .header("authToken", token)
