@@ -12,7 +12,6 @@ import java.util.Properties;
 
 import static io.restassured.RestAssured.given;
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestYota {
     private static String adminToken;
     private static String userToken;
@@ -37,29 +36,25 @@ public class TestYota {
             throw new RuntimeException("Не удалось загрузить файл свойств", e);
         }
     }
-    @ParameterizedTest
-    @CsvSource({
-            "admin,password",
-            "user,password"
-    })
-    public void authorization(String userName, String password){
-        Steps.loggingInAccount(userName,password);
+    @Test
+    public void businessStoryByAdmin() {
+        String token = Steps.loggingInAccount("admin", "password");
+        List<Long> numbers = Steps.gettingEmptyPhone(token);
+        CustomerInfo customerInfo = Steps.postingCustomer(token, numbers);
+        Steps.gettingCustomerById(token, customerInfo.getIdCustomer());
+        Steps.findingCustomerByNumber(token, customerInfo.getPhone());
+        Steps.changingCustomerStatus(token, customerInfo.getIdCustomer(), "admin");
     }
-
-    @ParameterizedTest
-    @CsvSource({
-            "admin,password",
-            "user,password"
-    })
-    public void businessStory(String userName, String password){
-        String token = Steps.loggingInAccount(userName, password);
+    @Test
+    public void businessStoryByUser(){
+        String token = Steps.loggingInAccount("user", "password");
         List<Long> numbers = Steps.gettingEmptyPhone(token);
         CustomerInfo customerInfo = Steps.postingCustomer(token,numbers);
-        System.out.println(customerInfo.getIdCustomer());
         Steps.gettingCustomerById(token,customerInfo.getIdCustomer());
         Steps.findingCustomerByNumber(token,customerInfo.getPhone());
-        Steps.changingCustomerStatus(token,customerInfo.getIdCustomer(),userName);
-    }
+        Steps.changingCustomerStatus(token,customerInfo.getIdCustomer(),"user");
+
+        }
     @Disabled
     @Test
     public void xmlRequest(){

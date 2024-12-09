@@ -5,11 +5,11 @@ import com.google.gson.Gson;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import lombok.extern.slf4j.Slf4j;
 import org.awaitility.Awaitility;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
@@ -18,14 +18,14 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import static io.restassured.RestAssured.given;
 
+
+@Slf4j
 public class Steps {
     public static String loggingInAccount(String username, String password) {
-        //Форматируемая строка запроса, зависит от переедаемых логина и пароля в метод
+
         LoginRequest loginRequest = new LoginRequest(username, password);
         Gson gson = new Gson();
         String requestBody = gson.toJson(loginRequest);
-        System.out.println(requestBody);
-
         Response response = given()//Запрос к сервису, с передачей логина и пароля для авторизации
                 .contentType(ContentType.JSON)
                 .body(requestBody)
@@ -35,7 +35,8 @@ public class Steps {
                 .statusCode(200)
                 .extract().response();
         String token = response.jsonPath().getString("token");
-        System.out.println(token);
+        log.info("Токен полученный от роли {}: {}",username,token);
+
         return token;
     }
     public static List<Long> gettingEmptyPhone(String token){
@@ -56,12 +57,12 @@ public class Steps {
                             return true;
                         }
                     } else {String errorMessage = response.jsonPath().getString("errorMessage");
-                        System.out.println(errorMessage);
+                        log.error(errorMessage);
                         return false;
                     }
                     return false;
                 });
-        System.out.println(result);
+        log.info(String.valueOf(result));
         return result.get();
 
 
@@ -95,8 +96,8 @@ public class Steps {
                 }
                     return false;
                 });
-        System.out.println(temp);
-        System.out.println(successfulPhone);
+        log.info(String.valueOf("ID полученный при регистрации: "+temp));
+        log.info(String.valueOf("Зарегистрированный телефон: "+successfulPhone));
         CustomerInfo customerInfo = new CustomerInfo(temp.get(),successfulPhone.get());
         return customerInfo;
     }
@@ -116,9 +117,9 @@ public class Steps {
                             .then()
                             .extract().response();
                         if ("ACTIVE".equals(response.jsonPath().getString("return.status"))) {//Если номер активировался, выводим паспортные данные, доп. параметры
-                            System.out.println(response.jsonPath().getString("return.status"));
-                            System.out.println(response.jsonPath().getString("return.additionalParameters"));
-                            System.out.println(response.jsonPath().getString("return.pd"));
+                            log.info(response.jsonPath().getString("return.status"));
+                            log.info(response.jsonPath().getString("return.additionalParameters"));
+                            log.info(response.jsonPath().getString("return.pd"));
                             return true;
                         }
                     return false;
@@ -147,9 +148,9 @@ public class Steps {
                 .post("/customer/findByPhoneNumber").then().statusCode(200).extract().response();
         String idCustomer = response.xmlPath().getString("Envelope.Body.customerId");
         if (idCustomer != null) {
-            System.out.println(idCustomer);
+            log.info(idCustomer);
         }else{
-            System.out.println("Данный номер вам не принадлежит");
+            log.info("Данный номер вам не принадлежит");
         }
     }
 
@@ -179,7 +180,7 @@ public class Steps {
                     .statusCode(200)
                     .extract().response();
             String statusGet = response.jsonPath().getString("return.status");
-            System.out.println(statusGet);
+            log.info(statusGet);
         }
     }
 }
