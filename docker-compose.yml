@@ -8,7 +8,7 @@ networks:
       config:
         - subnet: "10.2.0.0/16"
 
-services:        
+services:
   test-app:
     build: test-app
     container_name: yota-test-app
@@ -16,5 +16,21 @@ services:
       - '8090:8080'
     networks:
       yota_test_task:
-          ipv4_address: "10.2.1.4"
+        ipv4_address: "10.2.1.4"
     restart: unless-stopped
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    ports:
+      - '8081:8080' # Порт для доступа к Jenkins
+      - '50000:50000' # Порт для агентской связи
+    networks:
+      yota_test_task:
+        ipv4_address: "10.2.1.5" # Уникальный IP в сети
+    restart: unless-stopped
+    volumes:
+      - jenkins_home:/var/jenkins_home # Персистентное хранилище для Jenkins данных
+
+volumes:
+  jenkins_home:
