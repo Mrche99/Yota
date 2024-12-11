@@ -1,0 +1,28 @@
+2024-12-11 08:30:44 INFO  [ForkJoinPool-1-worker-2] Steps - Токен полученный от роли admin: adc7e579e0834837938e29190033b24e
+2024-12-11 08:30:44 INFO  [ForkJoinPool-1-worker-3] Steps - Токен полученный от роли user: 0331a5328168494a846f8c648bab1b4d
+2024-12-11 08:30:44 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-11 08:30:44 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-11 08:30:44 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-11 08:30:44 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-11 08:30:45 INFO  [ForkJoinPool-1-worker-3] Steps - [79281592322, 79284690698, 79282061976]
+2024-12-11 08:30:45 INFO  [ForkJoinPool-1-worker-2] Steps - [79281505469, 79285728635, 79283736630, 79289693855, 79287877119]
+2024-12-11 08:30:45 INFO  [ForkJoinPool-1-worker-3] Steps - ID полученный при регистрации: 24b26446-27a1-4c1a-988e-d2ed0f0ebc79
+2024-12-11 08:30:45 INFO  [ForkJoinPool-1-worker-3] Steps - Зарегистрированный телефон: 79281592322
+2024-12-11 08:30:45 INFO  [ForkJoinPool-1-worker-2] Steps - ID полученный при регистрации: 85b53c60-f0b5-46ca-8be8-48470fc2c612
+2024-12-11 08:30:45 INFO  [ForkJoinPool-1-worker-2] Steps - Зарегистрированный телефон: 79283736630
+2024-12-11 08:30:45 INFO  [awaitility-thread] Steps - ACTIVE
+2024-12-11 08:30:45 INFO  [awaitility-thread] Steps - ACTIVE
+2024-12-11 08:30:45 INFO  [awaitility-thread] Steps - [string:test]
+2024-12-11 08:30:45 INFO  [awaitility-thread] Steps - [string:test]
+2024-12-11 08:30:45 INFO  [awaitility-thread] Steps - {
+  "passportNumber": "594466",
+  "passportSeries": "6154"
+}
+2024-12-11 08:30:45 INFO  [awaitility-thread] Steps - {
+  "passportNumber": "260373",
+  "passportSeries": "6010"
+}
+2024-12-11 08:30:45 INFO  [ForkJoinPool-1-worker-2] Steps - 85b53c60-f0b5-46ca-8be8-48470fc2c612
+2024-12-11 08:30:45 INFO  [ForkJoinPool-1-worker-3] Steps - 24b26446-27a1-4c1a-988e-d2ed0f0ebc79
+2024-12-11 08:30:45 INFO  [ForkJoinPool-1-worker-3] Steps - ACTIVE
+2024-12-11 08:30:45 INFO  [ForkJoinPool-1-worker-2] Steps - New

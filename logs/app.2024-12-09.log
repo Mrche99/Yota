@@ -1,0 +1,115 @@
+2024-12-09 21:42:44 INFO  [ForkJoinPool-1-worker-4] Steps - Токен полученный от роли admin: a78e19c27fd84dae845410f98b3e6978
+2024-12-09 21:42:44 INFO  [ForkJoinPool-1-worker-6] Steps - Токен полученный от роли user: 33e15d37bebe4dde97cb459c4611588a
+2024-12-09 21:42:44 INFO  [ForkJoinPool-1-worker-3] Steps - Токен полученный от роли admin: 9031bdfbaf0f4784920037d6e5a4e935
+2024-12-09 21:42:44 INFO  [ForkJoinPool-1-worker-5] Steps - Токен полученный от роли user: fb1369334a4548c8b91449cf457a4709
+2024-12-09 21:43:42 INFO  [ForkJoinPool-1-worker-3] Steps - Токен полученный от роли user: 6925785cd8a04e048826d0d27357b6e1
+2024-12-09 21:43:42 INFO  [ForkJoinPool-1-worker-2] Steps - Токен полученный от роли admin: 0e3afd6a2e564fc8be030fcb4a79a560
+2024-12-09 21:48:34 INFO  [ForkJoinPool-1-worker-2] Steps - Токен полученный от роли admin: 3cc2cce71faf47d08d3d0090edd4bda2
+2024-12-09 21:48:34 INFO  [ForkJoinPool-1-worker-3] Steps - Токен полученный от роли user: 0f22aaef4cf44b588c59d04edd4605cd
+2024-12-09 21:48:34 INFO  [ForkJoinPool-1-worker-3] Steps - [79281906564, 79289799830, 79280246924, 79289625067, 79281718061, 79282958080]
+2024-12-09 21:48:34 INFO  [ForkJoinPool-1-worker-2] Steps - [79284866956, 79284455116, 79280542838, 79286854175]
+2024-12-09 21:48:34 INFO  [ForkJoinPool-1-worker-3] Steps - ID полученный при регистрации: 972a3010-d12d-4883-b607-86e6bb9872fd
+2024-12-09 21:48:34 INFO  [ForkJoinPool-1-worker-2] Steps - ID полученный при регистрации: 2228b1d2-05ed-487d-8994-f2b2ed06e5a4
+2024-12-09 21:48:34 INFO  [ForkJoinPool-1-worker-3] Steps - Зарегистрированный телефон: 79281906564
+2024-12-09 21:48:34 INFO  [ForkJoinPool-1-worker-2] Steps - Зарегистрированный телефон: 79284866956
+2024-12-09 21:50:18 INFO  [ForkJoinPool-1-worker-3] Steps - Токен полученный от роли user: c7ab280ab04e47ea8ba9d6a7714d8354
+2024-12-09 21:50:18 INFO  [ForkJoinPool-1-worker-2] Steps - Токен полученный от роли admin: fb2af38268b54b78a3881e3a165feefa
+2024-12-09 21:50:18 INFO  [ForkJoinPool-1-worker-2] Steps - [79285544918, 79288422989, 79281293101, 79282502349, 79288424883, 79285234983, 79286402645, 79281596811, 79285593708]
+2024-12-09 21:50:18 INFO  [ForkJoinPool-1-worker-3] Steps - [79289519546, 79281888832, 79285113464, 79282789487, 79288887728]
+2024-12-09 21:50:18 INFO  [ForkJoinPool-1-worker-3] Steps - ID полученный при регистрации: bf102a65-e2c0-4fdb-bc77-7fc5ce175160
+2024-12-09 21:50:18 INFO  [ForkJoinPool-1-worker-2] Steps - ID полученный при регистрации: 4e35864c-f99b-4f00-9b81-1c2d8f3e58e3
+2024-12-09 21:50:18 INFO  [ForkJoinPool-1-worker-3] Steps - Зарегистрированный телефон: 79289519546
+2024-12-09 21:50:18 INFO  [ForkJoinPool-1-worker-2] Steps - Зарегистрированный телефон: 79285544918
+2024-12-09 21:51:25 INFO  [awaitility-thread] Steps - ACTIVE
+2024-12-09 21:51:25 INFO  [awaitility-thread] Steps - ACTIVE
+2024-12-09 21:51:25 INFO  [awaitility-thread] Steps - [string:test]
+2024-12-09 21:51:25 INFO  [awaitility-thread] Steps - [string:test]
+2024-12-09 21:51:25 INFO  [awaitility-thread] Steps - {
+  "passportNumber": "431536",
+  "passportSeries": "0533"
+}
+2024-12-09 21:51:25 INFO  [awaitility-thread] Steps - {
+  "passportNumber": "400565",
+  "passportSeries": "2877"
+}
+2024-12-09 21:51:25 INFO  [ForkJoinPool-1-worker-2] Steps - 4e35864c-f99b-4f00-9b81-1c2d8f3e58e3
+2024-12-09 21:51:25 INFO  [ForkJoinPool-1-worker-3] Steps - bf102a65-e2c0-4fdb-bc77-7fc5ce175160
+2024-12-09 21:51:25 INFO  [ForkJoinPool-1-worker-2] Steps - New
+2024-12-09 21:51:25 INFO  [ForkJoinPool-1-worker-3] Steps - ACTIVE
+2024-12-09 21:53:25 INFO  [ForkJoinPool-1-worker-2] Steps - Токен полученный от роли admin: db52259721b445a8a8423f969e1f0322
+2024-12-09 21:53:25 INFO  [ForkJoinPool-1-worker-3] Steps - Токен полученный от роли user: f07b8b9b5c0347009636bafcb192a889
+2024-12-09 21:53:26 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-09 21:53:26 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-09 21:53:26 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-09 21:53:26 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-09 21:53:26 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-09 21:53:26 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-09 21:53:26 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-09 21:53:26 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-09 21:53:26 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-09 21:53:26 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-09 21:53:26 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-09 21:53:26 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-09 21:53:26 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-09 21:53:26 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-09 21:53:26 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-09 21:53:26 INFO  [ForkJoinPool-1-worker-2] Steps - [79285771278, 79285080867]
+2024-12-09 21:53:27 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-09 21:53:27 INFO  [ForkJoinPool-1-worker-2] Steps - ID полученный при регистрации: cd42e410-9866-406e-b1bc-5c160de95225
+2024-12-09 21:53:27 INFO  [ForkJoinPool-1-worker-2] Steps - Зарегистрированный телефон: 79285771278
+2024-12-09 21:53:27 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-09 21:53:27 INFO  [ForkJoinPool-1-worker-3] Steps - [79281717733, 79285978987, 79288884700, 79280745952]
+2024-12-09 21:53:27 INFO  [ForkJoinPool-1-worker-3] Steps - ID полученный при регистрации: 9bc4c52a-e7c3-4e5b-9da5-0d4471bf807b
+2024-12-09 21:53:27 INFO  [ForkJoinPool-1-worker-3] Steps - Зарегистрированный телефон: 79288884700
+2024-12-09 21:55:25 INFO  [awaitility-thread] Steps - ACTIVE
+2024-12-09 21:55:25 INFO  [awaitility-thread] Steps - ACTIVE
+2024-12-09 21:55:25 INFO  [awaitility-thread] Steps - [string:test]
+2024-12-09 21:55:25 INFO  [awaitility-thread] Steps - [string:test]
+2024-12-09 21:55:25 INFO  [awaitility-thread] Steps - {
+  "passportNumber": "552576",
+  "passportSeries": "6470"
+}
+2024-12-09 21:55:25 INFO  [awaitility-thread] Steps - {
+  "passportNumber": "879071",
+  "passportSeries": "6622"
+}
+2024-12-09 21:55:25 INFO  [ForkJoinPool-1-worker-2] Steps - cd42e410-9866-406e-b1bc-5c160de95225
+2024-12-09 21:55:25 INFO  [ForkJoinPool-1-worker-3] Steps - 9bc4c52a-e7c3-4e5b-9da5-0d4471bf807b
+2024-12-09 21:55:25 INFO  [ForkJoinPool-1-worker-3] Steps - ACTIVE
+2024-12-09 21:55:25 INFO  [ForkJoinPool-1-worker-2] Steps - New
+2024-12-09 21:56:14 INFO  [ForkJoinPool-1-worker-3] Steps - Токен полученный от роли user: 0a44aedfa8fa4edeb9d95608b226f5ea
+2024-12-09 21:56:14 INFO  [ForkJoinPool-1-worker-2] Steps - Токен полученный от роли admin: 1f6b181a13324e10846403fb8166a662
+2024-12-09 21:56:14 INFO  [ForkJoinPool-1-worker-2] Steps - [79285082970, 79283980737, 79280024790, 79288419468, 79281292613, 79285601024]
+2024-12-09 21:56:14 INFO  [ForkJoinPool-1-worker-3] Steps - [79286834171, 79282449548, 79284358471, 79288398542, 79280065397, 79283669799]
+2024-12-09 21:56:14 INFO  [ForkJoinPool-1-worker-2] Steps - ID полученный при регистрации: f006fdd8-4292-42f5-a21a-7e9ec95f110f
+2024-12-09 21:56:14 INFO  [ForkJoinPool-1-worker-2] Steps - Зарегистрированный телефон: 79285082970
+2024-12-09 21:56:14 INFO  [ForkJoinPool-1-worker-3] Steps - ID полученный при регистрации: 4dae7645-752a-4f19-8045-42ddfeea8719
+2024-12-09 21:56:14 INFO  [ForkJoinPool-1-worker-3] Steps - Зарегистрированный телефон: 79282449548
+2024-12-09 21:58:23 INFO  [ForkJoinPool-1-worker-2] Steps - Токен полученный от роли admin: 58256c70481542468db80e812b1f3b28
+2024-12-09 21:58:23 INFO  [ForkJoinPool-1-worker-3] Steps - Токен полученный от роли user: d07bffb5eef547009cb3cf0ed0ba1d4f
+2024-12-09 21:58:23 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-09 21:58:23 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-09 21:58:24 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-09 21:58:24 ERROR [awaitility-thread] Steps - Сервис не доступен
+2024-12-09 21:58:24 INFO  [ForkJoinPool-1-worker-3] Steps - [79289657873, 79281138488, 79285066537, 79282456779, 79283196066]
+2024-12-09 21:58:24 INFO  [ForkJoinPool-1-worker-2] Steps - [79283496840, 79281985430, 79284285674, 79283258342]
+2024-12-09 21:58:24 INFO  [ForkJoinPool-1-worker-2] Steps - ID полученный при регистрации: 0b8f62a1-ba66-4848-acc2-f8d13ef357bc
+2024-12-09 21:58:24 INFO  [ForkJoinPool-1-worker-2] Steps - Зарегистрированный телефон: 79283496840
+2024-12-09 21:58:24 INFO  [ForkJoinPool-1-worker-3] Steps - ID полученный при регистрации: 7de2bfa3-ddc1-4b84-8f97-f53e4eafd777
+2024-12-09 21:58:24 INFO  [ForkJoinPool-1-worker-3] Steps - Зарегистрированный телефон: 79281138488
+2024-12-09 21:59:25 INFO  [awaitility-thread] Steps - ACTIVE
+2024-12-09 21:59:25 INFO  [awaitility-thread] Steps - ACTIVE
+2024-12-09 21:59:25 INFO  [awaitility-thread] Steps - [string:test]
+2024-12-09 21:59:25 INFO  [awaitility-thread] Steps - [string:test]
+2024-12-09 21:59:25 INFO  [awaitility-thread] Steps - {
+  "passportNumber": "037177",
+  "passportSeries": "0987"
+}
+2024-12-09 21:59:25 INFO  [awaitility-thread] Steps - {
+  "passportNumber": "414384",
+  "passportSeries": "3297"
+}
+2024-12-09 21:59:25 INFO  [ForkJoinPool-1-worker-3] Steps - 7de2bfa3-ddc1-4b84-8f97-f53e4eafd777
+2024-12-09 21:59:25 INFO  [ForkJoinPool-1-worker-2] Steps - 0b8f62a1-ba66-4848-acc2-f8d13ef357bc
+2024-12-09 21:59:25 INFO  [ForkJoinPool-1-worker-3] Steps - ACTIVE
+2024-12-09 21:59:25 INFO  [ForkJoinPool-1-worker-2] Steps - New
