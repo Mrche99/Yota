@@ -18,23 +18,12 @@ public class TestYota {
 
     @BeforeAll
     public static void setUp() {
-        Properties prop = new Properties();
-        try (InputStream input = RestAssuredConfig.class.getClassLoader().getResourceAsStream("application.properties")) {
-            if (input == null) {
-                throw new IOException("Файл свойств application.properties не найден в test ресурсах!");
-            }
 
-            // Загружаем свойства
-            prop.load(input);
-
-            // Устанавливаем baseURI для RestAssured
-            RestAssured.baseURI = prop.getProperty("restassured.baseURI");
+            RestAssured.baseURI = System.getProperty("environment");
+            //RestAssured.baseURI = prop.getProperty("restassured.baseURI");
 
             System.out.println("RestAssured Base URI: " + RestAssured.baseURI);
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Не удалось загрузить файл свойств", e);
-        }
+
     }
     @Test
     public void businessStoryByAdmin() {
